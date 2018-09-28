@@ -1,7 +1,7 @@
 FROM embeddedenterprises/burrow as builder
 RUN apk update && apk add build-base
 
-RUN mkdir $GOPATH/src/github.com/jwuensche/autobahnausfahrt
+RUN mkdir $GOPATH/src/github.com/jwuensche/autobahnausfahrt -p
 
 COPY . $GOPATH/src/github.com/jwuensche/autobahnausfahrt
 WORKDIR $GOPATH/src/github.com/jwuensche/autobahnausfahrt

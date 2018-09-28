@@ -86,7 +86,7 @@ func (b *metrics) prometheusExport() (raw []byte, err error) {
 	fields := reflect.TypeOf(*b)
 	for i := 0; i < fields.NumField(); i++ {
 		if _, ok := (reflect.ValueOf(*b).Field(i).Interface()).(uint64); ok != true {
-			// promSubExport(content, fields.Field(i).Type, reflect.ValueOf(*b).Field(i))
+			promSubExport(content, fields.Field(i).Type, reflect.ValueOf(*b).Field(i), fields.Field(i).Tag.Get(prometheusTag), "")
 		} else {
 			util.Log.Debugf("Tag: %s, Value: %d", fields.Field(i).Tag.Get(prometheusTag), reflect.ValueOf(*b))
 			fmt.Fprintf(content, "%s %d\n", fields.Field(i).Tag.Get(prometheusTag), (reflect.ValueOf(*b).Field(i).Interface()).(uint64))
@@ -99,11 +99,27 @@ func (b *metrics) prometheusExport() (raw []byte, err error) {
 }
 
 // semi-recursive approach for all sub categories
-func promSubExport(writer io.Writer, fields reflect.Type, values reflect.Value) {
-	for i := 0; i < fields.NumField(); i++ {
-		if _, ok := (values.Field(i).Interface()).(uint64); ok != true {
-			promSubExport(writer, fields.Field(i).Type, values.Field(i))
+func promSubExport(writer io.Writer, fields reflect.Type, values reflect.Value, tag string, label string) {
+	if fields.Kind() == reflect.Map {
+		for _, key := range values.MapKeys() {
+			if values.MapIndex(key).Kind() != reflect.Uint64 {
+				promSubExport(writer, values.MapIndex(key).Type(), values.MapIndex(key), "", values.MapIndex(key).Type().Name())
+			} else {
+				fmt.Fprintf(writer, "%s{label=\"%s\"} %d\n", tag, key.String(), values.MapIndex(key).Interface().(uint64))
+			}
 		}
-		fmt.Fprintf(writer, "%s %d\n", fields.Field(i).Tag.Get(prometheusTag), (values.Field(i).Interface()).(uint64))
+	} else if fields.Kind() == reflect.Struct {
+		for i := 0; i < fields.NumField(); i++ {
+			if _, ok := (values.Field(i).Interface()).(uint64); ok != true {
+				promSubExport(writer, fields.Field(i).Type, values.Field(i), fields.Field(i).Tag.Get(prometheusTag), fields.Field(i).Name)
+			} else {
+				fmt.Fprintf(writer, "%s{label=\"%s\"} %d\n", fields.Field(i).Tag.Get(prometheusTag), label, (values.Field(i).Interface()).(uint64))
+			}
+		}
+	} else if fields.Kind() == reflect.Uint64 {
+		// TBD
+	} else {
+		util.Log.Critical("Unrecognized data structure: %v", fields.Kind())
+		return
 	}
 }
