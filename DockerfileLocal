@@ -1,0 +1,17 @@
+FROM embeddedenterprises/burrow as builder
+RUN apk update && apk add build-base
+
+RUN mkdir $GOPATH/src/github.com/jwuensche/autobahnausfahrt
+
+COPY . $GOPATH/src/github.com/jwuensche/autobahnausfahrt
+WORKDIR $GOPATH/src/github.com/jwuensche/autobahnausfahrt
+
+RUN burrow e && burrow b
+RUN cp bin/autobahnausfahrt /bin
+
+FROM scratch
+LABEL service "autobahnkreuz"
+
+COPY --from=builder /bin/autobahnausfahrt /bin/autobahnausfahrt
+ENTRYPOINT ["/bin/autobahnausfahrt"]
+CMD []

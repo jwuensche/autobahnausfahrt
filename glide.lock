@@ -1,0 +1,6 @@
+hash: 5153d275e86cf487ae6672e23b62ff57e302df9e445173aee3e3b2f23c47b413
+updated: 2018-09-28T00:54:58.815520998+02:00
+imports:
+- name: github.com/op/go-logging
+  version: b2cb9fa56473e98db8caba80237377e83fe44db5
+testImports: []
