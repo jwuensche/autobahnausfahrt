@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
@@ -10,6 +11,7 @@ import (
 )
 
 func main() {
+	fmt.Print("STARTING CONTAINER")
 	util.Init()
 	util.Log.Info("Starting autobahnausfahrt")
 	util.GetEnvVar()

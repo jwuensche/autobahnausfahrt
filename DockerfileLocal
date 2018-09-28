@@ -10,7 +10,7 @@ RUN burrow e && burrow b
 RUN cp bin/autobahnausfahrt /bin
 
 FROM scratch
-LABEL service "autobahnkreuz"
+LABEL service "autobahnausfahrt"
 
 COPY --from=builder /bin/autobahnausfahrt /bin/autobahnausfahrt
 ENTRYPOINT ["/bin/autobahnausfahrt"]

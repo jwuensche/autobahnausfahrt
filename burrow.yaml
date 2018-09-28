@@ -10,7 +10,7 @@ args:
   run: ""
   go:
     test: ""
-    build: ""
+    build: -ldflags '-linkmode=external "-extldflags=-static"'
     doc: ""
     vet: ""
     fmt: -s
