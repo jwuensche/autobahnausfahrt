@@ -14,8 +14,10 @@ Following environmeny variables are support to configure the exporter:
 | ------|------|------------------|
 | `INTERCONNECT_PORT` | define the port the router mertrics api is exposed | `7070` |
 | `INTERCONNECT_ADDRESS` | define the current address the router is reachable on | `localhost` |
-| `EXPORT_PORT` | which port the scraper interface is exposed | `9101` |
-| `EXPORT_ROUTE` | on which route the interface is addressable | `/metrics` |
+| `AUSFAHRT_PORT` | which port the scraper interface is exposed | `9101` |
+| `AUSFAHRT_ROUTE` | on which route the interface is addressable | `/metrics` |
+| `AUSFAHRT_CERT` | TLS certificate, if this value is set TLS will be used | `ausfahrt.cert` |
+| `AUSFAHRT_KEY` | TLS key | `ausfahrt.key` |
 
 ## Defining own Interfaces
 
