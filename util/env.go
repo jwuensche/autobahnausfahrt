@@ -25,7 +25,7 @@ var Conf Config
 
 // GetEnvVar initializes the config with all applicable environment variables
 func GetEnvVar() {
-	Log.Info("Reading in environemnt Variables")
+	Log.Info("Reading in environmennt Variables")
 	Conf.Port = os.Getenv("EXPORT_PORT")
 	Conf.Route = os.Getenv("EXPORT_ROUTE")
 	Conf.InterconnectPort = os.Getenv("INTERCONNECT_PORT")

@@ -19,14 +19,14 @@ const (
 )
 
 type metrics struct {
-	RecvMessageCount      uint64            `prom:"messages_count_received_total"`
-	SendMessageCount      uint64            `prom:"messages_count_send_total"`
-	RecvTrafficBytesTotal uint64            `prom:"traffic_bytes_received_total"`
-	SendTrafficBytesTotal uint64            `prom:"traffic_bytes_send_total"`
-	Authentication        map[string]auth   `prom:"authentications"`
-	AuthRolesClients      map[string]uint64 `prom:"authorization_roles"`
-	SuccededAuthorization uint64            `prom:"authorizations_succeded"`
-	RejectedAuthorization uint64            `prom:"authorizations_rejected"`
+	RecvMessageCount       uint64            `prom:"messages_count_received_total"`
+	SendMessageCount       uint64            `prom:"messages_count_send_total"`
+	RecvTrafficBytesTotal  uint64            `prom:"traffic_bytes_received_total"`
+	SendTrafficBytesTotal  uint64            `prom:"traffic_bytes_send_total"`
+	Authentication         map[string]auth   `prom:"authentications"`
+	AuthRolesClients       map[string]uint64 `prom:"authorization_roles"`
+	SucceededAuthorization uint64            `prom:"authorizations_succeded"`
+	RejectedAuthorization  uint64            `prom:"authorizations_rejected"`
 }
 
 type auth struct {
