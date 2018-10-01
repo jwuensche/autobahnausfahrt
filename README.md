@@ -1,5 +1,7 @@
 # autobahnausfahrt
 
+![https://goreportcard.com/report/github.com/jwuensche/autobahnausfahrt](https://goreportcard.com/badge/github.com/jwuensche/autobahnausfahrt)
+
 API exporter for the `autobahnkreuz` metrics API
 
 `autobahnausfahrt` is designed to open any scrapable interface for monitoring databases (currently only prometheus)

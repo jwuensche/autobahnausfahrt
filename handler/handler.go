@@ -25,13 +25,13 @@ type metrics struct {
 	SendTrafficBytesTotal  uint64            `prom:"traffic_bytes_send_total"`
 	Authentication         map[string]auth   `prom:"authentications"`
 	AuthRolesClients       map[string]uint64 `prom:"authorization_roles"`
-	SucceededAuthorization uint64            `prom:"authorizations_succeded"`
+	SucceededAuthorization uint64            `prom:"authorizations_succeeded"`
 	RejectedAuthorization  uint64            `prom:"authorizations_rejected"`
 }
 
 type auth struct {
-	Succeded uint64 `prom:"authentications_succeded"`
-	Rejected uint64 `prom:"authentications_rejected"`
+	Succeeded uint64 `prom:"authentications_succeeded"`
+	Rejected  uint64 `prom:"authentications_rejected"`
 }
 
 // Render handles all incoming request for metric routes depending on the defined scraper, default prometheus
