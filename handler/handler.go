@@ -27,6 +27,7 @@ type metrics struct {
 	AuthRolesClients       map[string]uint64 `prom:"authorization_roles"`
 	SucceededAuthorization uint64            `prom:"authorizations_succeeded"`
 	RejectedAuthorization  uint64            `prom:"authorizations_rejected"`
+	PingAmount             uint64            `prom:"ping_total"`
 }
 
 type auth struct {
